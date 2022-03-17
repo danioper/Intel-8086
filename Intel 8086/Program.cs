@@ -1,4 +1,5 @@
 ﻿using System;
+using Procesor__Biblioteka;
 
 namespace Intel_8086
 {
@@ -6,29 +7,9 @@ namespace Intel_8086
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Podaj AH");
-            int ah = isHex(Console.ReadLine());
-            Console.WriteLine("Podaj AL");
-            int al = isHex(Console.ReadLine());
-            Console.WriteLine("Podaj BH");
-            int bh = isHex(Console.ReadLine());
-            Console.WriteLine("Podaj BL");
-            int bl = isHex(Console.ReadLine());
-            Console.WriteLine("Podaj CH");
-            int ch = isHex(Console.ReadLine());
-            Console.WriteLine("Podaj CL");
-            int cl = isHex(Console.ReadLine());
-            Console.WriteLine("Podaj DH");
-            int dh = isHex(Console.ReadLine());
-            Console.WriteLine("Podaj DL");
-            int dl = isHex(Console.ReadLine());
-            Console.WriteLine($"{ah},{al},{bl}");
+            Procesor intel8086 = new Procesor();
+            Console.WriteLine(intel8086);
         }
-
-        static int isHex(string hex)
-        {
-                int hexInt = Convert.ToInt32(hex, 16);
-                return hexInt;
-        }
+        
     }
 }
