@@ -6,37 +6,36 @@
         xmlns:local="clr-namespace:Symulator_Intel_8086"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FF94B63C">
+    <Grid Background="#FFB7D862">
         <Grid Margin="1,212,614,0" Background="#FFBEE09C" Height="222" VerticalAlignment="Top">
-            <RadioButton x:Name="MOV" Content="MOV" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="XCHG" HorizontalAlignment="Left" Margin="10,49,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="INC" Content="INC" HorizontalAlignment="Left" Margin="10,69,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="DEC" Content="DEC" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="NOT" Content="NOT" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="NEG" Content="NEG" HorizontalAlignment="Left" Margin="10,129,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
-                <RadioButton.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="-0.744"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </RadioButton.RenderTransform>
-            </RadioButton>
 
             <TextBlock HorizontalAlignment="Left" Height="21" Margin="10,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"><Run Language="pl-pl" Text="Wybierz rozkaz"/></TextBlock>
+            <ComboBox x:Name="Rozkaz" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="149">
+                <ComboBoxItem Content="MOV"/>
+                <ComboBoxItem Content="XCH"/>
+                <ComboBoxItem Content="INC"/>
+                <ComboBoxItem Content="DEC"/>
+                <ComboBoxItem Content="NOT"/>
+                <ComboBoxItem Content="NEG"/>
+                <ComboBoxItem Content="AND"/>
+                <ComboBoxItem Content="OR"/>
+                <ComboBoxItem Content="XOR"/>
+                <ComboBoxItem Content="ADD"/>
+                <ComboBoxItem Content="SUB"/>
+            </ComboBox>
+            <Button x:Name="Symuluj" Content="Symuluj&#xA;" HorizontalAlignment="Left" Margin="10,78,0,0" VerticalAlignment="Top" Width="149" Height="23"/>
 
         </Grid>
         <Grid Background="#FFBEE09C" Margin="0,0,614,0" Height="217" VerticalAlignment="Top">
             <Button x:Name="Przypisz" Content="Przypisz&#xD;&#xA;" HorizontalAlignment="Left" Margin="10,145,0,0" VerticalAlignment="Top" Width="79" Height="20" Click="Przypisz_Click"/>
-            <TextBox Text="TextBox" TextWrapping="Wrap" Margin="50,10,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
-            <TextBox Text="TextBox" TextWrapping="Wrap" Margin="129,10,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
-            <TextBox Text="TextBox" TextWrapping="Wrap" Margin="50,41,0,0" HorizontalAlignment="Left" Width="30" Height="21" VerticalAlignment="Top"/>
-            <TextBox Text="TextBox" TextWrapping="Wrap" Margin="129,42,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
-            <TextBox Text="TextBox" TextWrapping="Wrap" Margin="50,75,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
-            <TextBox Text="TextBox" TextWrapping="Wrap" Margin="129,75,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
-            <TextBox Text="TextBox" TextWrapping="Wrap" Margin="50,108,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
-            <TextBox Text="TextBox" TextWrapping="Wrap" Margin="129,108,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30"/>
+            <TextBox x:Name="AHinput" Text="00" TextWrapping="Wrap" Margin="50,10,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" TextAlignment="Center"/>
+            <TextBox x:Name="ALinput" Text="00" TextWrapping="Wrap" Margin="129,10,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" TextAlignment="Center"/>
+            <TextBox x:Name="BHinput" Text="00" TextWrapping="Wrap" Margin="50,41,0,0" HorizontalAlignment="Left" Width="30" Height="21" VerticalAlignment="Top" TextAlignment="Center"/>
+            <TextBox x:Name="BLinput" Text="00" TextWrapping="Wrap" Margin="129,42,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" TextAlignment="Center"/>
+            <TextBox x:Name="CHinput" Text="00" TextWrapping="Wrap" Margin="50,75,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" TextAlignment="Center"/>
+            <TextBox x:Name="CLinput" Text="00" TextWrapping="Wrap" Margin="129,75,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" TextAlignment="Center"/>
+            <TextBox x:Name="DHinput" Text="00" TextWrapping="Wrap" Margin="50,108,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" TextAlignment="Center"/>
+            <TextBox x:Name="DLinput" Text="00" TextWrapping="Wrap" Margin="129,108,0,0" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" TextAlignment="Center"/>
             <Button x:Name="Losuj" Content="Losuj" HorizontalAlignment="Left" Margin="94,145,0,0" VerticalAlignment="Top" Width="70"/>
             <TextBlock x:Name="AH1" HorizontalAlignment="Left" Margin="22,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="28"><Run Text="A"/><Run Language="pl-pl" Text="H"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
             <TextBlock x:Name="AL" HorizontalAlignment="Left" Margin="101,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="28"><Run Text="A"/><Run Language="pl-pl" Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
@@ -48,27 +47,47 @@
             <TextBlock HorizontalAlignment="Left" Margin="101,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="28"><Run Text="D"/><Run Language="pl-pl" Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
 
         </Grid>
-        <Grid Height="207" Margin="169,0,551,0" VerticalAlignment="Top" Background="#FFEAD05A">
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,27,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,47,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,67,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,87,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,107,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,127,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,147,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,167,0,0" VerticalAlignment="Top"/>
+        <Grid Height="207" Margin="169,0,0,0" VerticalAlignment="Top" Background="#FFF1DD83" HorizontalAlignment="Left" Width="80">
+            <RadioButton x:Name="AH" Content="AH" HorizontalAlignment="Center" Margin="0,27,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="AL1" Content="AL" HorizontalAlignment="Left" Margin="22,47,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="BH" Content="BH" HorizontalAlignment="Center" Margin="0,67,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="BL" Content="BL" HorizontalAlignment="Center" Margin="0,87,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="CH" Content="CH" HorizontalAlignment="Left" Margin="24,107,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="CL" Content="CL" HorizontalAlignment="Center" Margin="0,127,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="DH" Content="DH" HorizontalAlignment="Left" Margin="24,147,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="DL" Content="DL" HorizontalAlignment="Center" Margin="0,167,0,0" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Center" Margin="0,6,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Language="pl-pl" Text="Rejestr nr 1"/></TextBlock>
         </Grid>
-        <Grid Height="238" Margin="169,196,551,0" VerticalAlignment="Top" Background="#FFEAD05A">
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,56,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,76,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,96,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,116,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,156,0,0" VerticalAlignment="Top"/>
-            <RadioButton Content="AH" HorizontalAlignment="Center" Margin="0,176,0,0" VerticalAlignment="Top"/>
+        <Grid Height="238" Margin="169,196,0,0" VerticalAlignment="Top" Background="#FFF1DD83" HorizontalAlignment="Left" Width="80">
+            <RadioButton x:Name="AH2" Content="AH" HorizontalAlignment="Center" Margin="0,36,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="AL2" Content="AL" HorizontalAlignment="Center" Margin="0,56,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="BH1" Content="BH" HorizontalAlignment="Center" Margin="0,76,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="BL1" Content="BL" HorizontalAlignment="Center" Margin="0,96,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="CH1" Content="CH" HorizontalAlignment="Center" Margin="0,116,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="CL1" Content="CL" HorizontalAlignment="Center" Margin="0,136,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="DH1" Content="DH" HorizontalAlignment="Center" Margin="0,156,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="DL1" Content="DL" HorizontalAlignment="Center" Margin="0,176,0,0" VerticalAlignment="Top"/>
             <TextBlock HorizontalAlignment="Center" Margin="0,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top"><Run Text="Rejestr nr "/><Run Language="pl-pl" Text="2"/></TextBlock>
+        </Grid>
+        <Grid Background="#FFBEE09C" Margin="265,0,0,0" Height="383" VerticalAlignment="Center" HorizontalAlignment="Left" Width="502">
+            <TextBox x:Name="ALbox" Text="00" TextWrapping="Wrap" Margin="338,62,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" FontSize="36" TextAlignment="Center"/>
+            <TextBlock x:Name="AL3" HorizontalAlignment="Left" Margin="266,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Text="A"/><Run Language="pl-pl" Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
+            <TextBox x:Name="BLbox" Text="00" TextWrapping="Wrap" Margin="338,138,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" FontSize="36" TextAlignment="Center"/>
+            <TextBox x:Name="CLbox" Text="00" TextWrapping="Wrap" Margin="338,212,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" FontSize="36" TextAlignment="Center"/>
+            <TextBox x:Name="DLbox" Text="00" TextWrapping="Wrap" Margin="338,285,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" FontSize="36" TextAlignment="Center"/>
+            <TextBlock x:Name="AL3_Copy" HorizontalAlignment="Left" Margin="266,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Language="pl-pl" Text="B"/><Run Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
+            <TextBlock x:Name="AL3_Copy1" HorizontalAlignment="Left" Margin="266,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Language="pl-pl" Text="C"/><Run Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
+            <TextBlock x:Name="AL3_Copy2" HorizontalAlignment="Left" Margin="266,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Language="pl-pl" Text="D"/><Run Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
+            <TextBox x:Name="AHbox" Text="00" TextWrapping="Wrap" Margin="120,62,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" FontSize="36" TextAlignment="Center"/>
+            <TextBlock x:Name="AL3_Copy3" HorizontalAlignment="Left" Margin="48,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Text="A"/><Run Language="pl-pl" Text="H"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
+            <TextBox x:Name="BHbox" Text="00" TextWrapping="Wrap" Margin="120,138,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" FontSize="36" TextAlignment="Center"/>
+            <TextBox x:Name="CHbox" Text="00" TextWrapping="Wrap" Margin="120,212,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" FontSize="36" TextAlignment="Center"/>
+            <TextBox x:Name="DHbox" Text="00" TextWrapping="Wrap" Margin="120,285,0,0" Height="54" VerticalAlignment="Top" HorizontalAlignment="Left" Width="120" FontSize="36" TextAlignment="Center"/>
+            <TextBlock x:Name="AL3_Copy4" HorizontalAlignment="Left" Margin="48,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Text="B"/><Run Language="pl-pl" Text="H"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
+            <TextBlock x:Name="AL3_Copy5" HorizontalAlignment="Left" Margin="48,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Text="C"/><Run Language="pl-pl" Text="H"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
+            <TextBlock x:Name="AL3_Copy6" HorizontalAlignment="Left" Margin="48,285,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Text="D"/><Run Language="pl-pl" Text="H"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
+            <TextBlock x:Name="AL3_Copy7" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="266" FontSize="30" Margin="120,0,0,0"><Run Language="pl-pl" Text="WYNIK REJESTRÓW"/></TextBlock>
+
         </Grid>
 
 

@@ -7,8 +7,8 @@ namespace Intel_8086
     {
         static void Main(string[] args)
         {
-            Procesor intel8086 = new Procesor();
-            Console.WriteLine(intel8086);
+            /*Procesor intel8086 = new Procesor();
+            Console.WriteLine(intel8086);*/
         }
         
     }

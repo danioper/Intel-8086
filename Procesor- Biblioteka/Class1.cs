@@ -6,16 +6,14 @@ namespace Procesor__Biblioteka
     {
         public static int IsHex()
         {
-            try
-            {
                 int hexInt = Convert.ToInt32(Console.ReadLine(), 16);
                 return hexInt;
-            }
-            catch
-            {
-                Console.WriteLine("Podano wartość poza zakresem hex, podaj liczbę jeszcze raz");
-                return Intel8086.IsHex();
-            }
+        }
+
+        public static int IsHex(string insertString)
+        {
+            int hexInt = Convert.ToInt32(insertString, 16);
+            return hexInt;
         }
     }
     public class Rejest
@@ -33,17 +31,18 @@ namespace Procesor__Biblioteka
     public class Procesor
     {
         public Rejest[] rejestr;
-        public Procesor(){
+        public Procesor() { }
+        public Procesor(string[] insert){
             rejestr = new Rejest[8];
-            rejestr[0] = new Rejest("AL", Intel8086.IsHex());
-            rejestr[1] = new Rejest("AH", Intel8086.IsHex());
-            rejestr[2] = new Rejest("BL", Intel8086.IsHex());
-            rejestr[3] = new Rejest("BH", Intel8086.IsHex());
-            rejestr[4] = new Rejest("CL", Intel8086.IsHex());
-            rejestr[5] = new Rejest("CH", Intel8086.IsHex());
-            rejestr[6] = new Rejest("DL", Intel8086.IsHex());
-            rejestr[7] = new Rejest("DH", Intel8086.IsHex());
-            WhatToDo();
+            rejestr[0] = new Rejest("AL", Intel8086.IsHex(insert[0]));
+            rejestr[1] = new Rejest("AH", Intel8086.IsHex(insert[1]));
+            rejestr[2] = new Rejest("BL", Intel8086.IsHex(insert[2]));
+            rejestr[3] = new Rejest("BH", Intel8086.IsHex(insert[3]));
+            rejestr[4] = new Rejest("CL", Intel8086.IsHex(insert[4]));
+            rejestr[5] = new Rejest("CH", Intel8086.IsHex(insert[5]));
+            rejestr[6] = new Rejest("DL", Intel8086.IsHex(insert[6]));
+            rejestr[7] = new Rejest("DH", Intel8086.IsHex(insert[7]));
+            //WhatToDo();
         }
 
         public string WhatToDo()
