@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Intel 8086", "Intel 8086\Intel 8086.csproj", "{F2EFF940-5551-44DE-93B6-5E2F8B584355}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Procesor- Biblioteka", "Procesor- Biblioteka\Procesor- Biblioteka.csproj", "{A6A632ED-6E3C-4FCB-B403-1D8682794827}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Procesor- Biblioteka", "Procesor- Biblioteka\Procesor- Biblioteka.csproj", "{A6A632ED-6E3C-4FCB-B403-1D8682794827}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Symulator Intel 8086", "Symulator Intel 8086\Symulator Intel 8086.csproj", "{C84CCFDC-9E17-49D7-B243-4370FB442E84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{A6A632ED-6E3C-4FCB-B403-1D8682794827}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A6A632ED-6E3C-4FCB-B403-1D8682794827}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A6A632ED-6E3C-4FCB-B403-1D8682794827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C84CCFDC-9E17-49D7-B243-4370FB442E84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C84CCFDC-9E17-49D7-B243-4370FB442E84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C84CCFDC-9E17-49D7-B243-4370FB442E84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C84CCFDC-9E17-49D7-B243-4370FB442E84}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
