@@ -65,7 +65,7 @@
             <TextBlock HorizontalAlignment="Left" Margin="101,108,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="18" Width="28"><Run Text="D"/><Run Language="pl-pl" Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
 
         </Grid>
-        <Grid Background="#FFBEE09C" Margin="265,26,0,0" HorizontalAlignment="Left" Width="502" Height="383" VerticalAlignment="Top">
+        <Grid Background="#FFBEE09C" Margin="265,14,0,0" HorizontalAlignment="Left" Width="502" Height="383" VerticalAlignment="Top">
             <TextBlock x:Name="AL3" HorizontalAlignment="Left" Margin="266,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Text="A"/><Run Language="pl-pl" Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
             <TextBlock x:Name="AL3_Copy" HorizontalAlignment="Left" Margin="266,138,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Language="pl-pl" Text="B"/><Run Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
             <TextBlock x:Name="AL3_Copy1" HorizontalAlignment="Left" Margin="266,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="54" Width="67" FontSize="30"><Run Language="pl-pl" Text="C"/><Run Text="L"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
