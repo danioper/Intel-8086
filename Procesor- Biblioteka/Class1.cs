@@ -16,6 +16,7 @@ namespace Procesor__Biblioteka
             return hexInt;
         }
     }
+    /*-------------------Przechowywanie rejestrów------------------*/
     public class Rejest
     {
         public string Name { get; set; }
@@ -26,8 +27,16 @@ namespace Procesor__Biblioteka
             this.Name = n;
             this.Value = v;
         }
+        public override string ToString()
+        {
+            return ToHex(Value);
+        }
+        public static string ToHex(int Value)
+        {
+            return ((byte)Value).ToString("x2").ToUpper();
+        }
     }
-
+    /*-------------------Przypisanie rejestrów do klasy Rejest------------------*/
     public class Procesor
     {
         public Rejest[] rejestr;
@@ -42,83 +51,120 @@ namespace Procesor__Biblioteka
             rejestr[5] = new Rejest("CH", Intel8086.IsHex(insert[5]));
             rejestr[6] = new Rejest("DL", Intel8086.IsHex(insert[6]));
             rejestr[7] = new Rejest("DH", Intel8086.IsHex(insert[7]));
-            //WhatToDo();
         }
-
-        public string WhatToDo()
-        {
-            string program = Console.ReadLine();
-            switch(program)
-            {
-                case "MOV":
-                        Mov();
-                    break;
-                case "XCH":
-                        XCH();
-                    break;
-                default:
-                    Console.WriteLine("Nieprawidłowa nazwa programu, upewnij się że nie wprowadziłeś literówki");
-                    WhatToDo();
-                    break;
-            }
-            return null;
-        }
-
-        public int Mov()
-        {
-            string x = Console.ReadLine().ToUpper();
-            string y = Console.ReadLine().ToUpper();
-
-            if (FindFromRejest(x) == -1 || FindFromRejest(y) == -1)
-            {
-                Console.WriteLine("Jeden z podanych rejestrów jest nieprawidłowy, podaj je ponownie");
-                Mov();
-            };
-
-            return rejestr[FindFromRejest(x)].Value = rejestr[FindFromRejest(y)].Value;
-
-        }
-
-        public int? XCH()
-        {
-            string x = Console.ReadLine().ToUpper();
-            string y = Console.ReadLine().ToUpper();
-
-            if (FindFromRejest(x) == -1 || FindFromRejest(y) == -1)
-            {
-                Console.WriteLine("Jeden z podanych rejestrów jest nieprawidłowy, podaj je ponownie");
-                Mov();
-            };
-            int tmp = rejestr[FindFromRejest(x)].Value;
-            rejestr[FindFromRejest(x)].Value = rejestr[FindFromRejest(y)].Value;
-            rejestr[FindFromRejest(y)].Value = tmp;
-
-            return null;
-        }
-
+        /*----------------------------------------------------------------*/
         public int FindFromRejest(string rejestrName)
         {
             switch (rejestrName)
             {
-                case "AL": return 0;
-                case "AH": return 1;
-                case "BL": return 2;
-                case "BH": return 3;
-                case "CL": return 4;
-                case "CH": return 5;
-                case "DL": return 6;
-                case "DH": return 7;
+                case "AH": return 0;
+                case "AL": return 1;
+                case "BH": return 2;
+                case "BL": return 3;
+                case "CH": return 4;
+                case "CL": return 5;
+                case "DH": return 6;
+                case "DL": return 7;
                 default: return -1;
             }
         }
-
-        public override string ToString()
+        /*-------------------Losowanie Rejestrów------------------*/
+        public string randomRejestr()
         {
-            return $" AL = {Convert.ToString(rejestr[0].Value, 16).ToUpper()}   AH = {Convert.ToString(rejestr[1].Value, 16).ToUpper()}\n" +
-                   $" BL = {Convert.ToString(rejestr[2].Value, 16).ToUpper()}   BH = {Convert.ToString(rejestr[3].Value, 16).ToUpper()}\n" +
-                   $" CL = {Convert.ToString(rejestr[4].Value, 16).ToUpper()}   CH = {Convert.ToString(rejestr[5].Value, 16).ToUpper()}\n" +
-                   $" DL = {Convert.ToString(rejestr[6].Value, 16).ToUpper()}   DH = {Convert.ToString(rejestr[7].Value, 16).ToUpper()}\n";
+            Random losuj = new Random();
+            return Rejest.ToHex(losuj.Next(0, 256));
+        }
+        /*-------------------Wybór rozkazu------------------*/
+        public bool WhatToDo(string program, string rej1, string rej2)
+        {
+            switch(program)
+            {
+                case "MOV":
+                       Mov(rej1, rej2);
+                    break;
+                case "XCHG":
+                        XCHG(rej1, rej2);
+                    break;
+                case "INC":
+                    Inc(rej1);
+                    break;
+                case "DEC":
+                    Dec(rej1);
+                    break;
+                case "NOT":
+                    Not(rej1);
+                    break;
+                case "NEG":
+                    Not(rej1);
+                    Inc(rej1);
+                    break;
+                case "AND":
+                    And(rej1, rej2);
+                    break;
+                case "OR":
+                    Or(rej1, rej2);
+                    break;
+                case "XOR":
+                    Xor(rej1, rej2);
+                    break;
+                case "ADD":
+                    Add(rej1, rej2);
+                    break;
+                case "SUB":
+                    Sub(rej1, rej2);
+                    break;
+                default:
+                    throw new Exception();
+            }
+            return true;
+        }
+
+        /*------------------------------Operacje dwu elementowe----------------------------------------*/
+        public void Mov(string rej1, string rej2)
+        { 
+            rejestr[FindFromRejest(rej1)].Value = rejestr[FindFromRejest(rej2)].Value;
+        }
+
+        public void XCHG(string rej1, string rej2)
+        {
+            var tmp = rejestr[FindFromRejest(rej1)].Value;
+            rejestr[FindFromRejest(rej1)].Value = rejestr[FindFromRejest(rej2)].Value;
+            rejestr[FindFromRejest(rej2)].Value = tmp;
+        }
+        public void Add(string rej1, string rej2)
+        {
+            rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value + (byte)rejestr[FindFromRejest(rej2)].Value;
+        }
+        public void Sub(string rej1, string rej2)
+        {
+            rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value - (byte)rejestr[FindFromRejest(rej2)].Value;
+        }
+        public void And(string rej1, string rej2)
+        {
+            rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value & (byte)rejestr[FindFromRejest(rej2)].Value;
+        }
+        public void Or(string rej1, string rej2)
+        {
+            rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value | (byte)rejestr[FindFromRejest(rej2)].Value;
+        }
+        public void Xor(string rej1, string rej2)
+        {
+            rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value ^ (byte)rejestr[FindFromRejest(rej2)].Value;
+        }
+        /*------------------------------Operacje jedno elementowe----------------------------------------*/
+        public void Inc(string rej1)
+        {
+            rejestr[FindFromRejest(rej1)].Value++;
+        }
+
+        public void Dec(string rej1)
+        {
+            rejestr[FindFromRejest(rej1)].Value--;
+        }
+
+        public void Not(string rej1)
+        {          
+            rejestr[FindFromRejest(rej1)].Value = ~((byte)(rejestr[FindFromRejest(rej1)].Value));
         }
     }
-
 }

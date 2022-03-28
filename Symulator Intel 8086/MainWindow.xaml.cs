@@ -21,11 +21,15 @@ namespace Symulator_Intel_8086
     /// </summary>
     public partial class MainWindow : Window
     {
-        Procesor procesor; 
+        Procesor procesor;
         public MainWindow()
         {
             procesor = new Procesor();
             InitializeComponent();
+            Rozkaz.Items.Add("INC");
+            Rozkaz.Items.Add("DEC");
+            Rozkaz.Items.Add("NEG");
+            Rozkaz.Items.Add("NOT");
         }
 
         private void Przypisz_Click(object sender, RoutedEventArgs e)
@@ -40,17 +44,78 @@ namespace Symulator_Intel_8086
             insert[6] = DHinput.Text;
             insert[7] = DLinput.Text;
 
-            AHbox.Text = insert[0];
-            ALbox.Text = insert[1];
-            BHbox.Text = insert[2];
-            BLbox.Text = insert[3];
-            CHbox.Text = insert[4];
-            CLbox.Text = insert[5];
-            DHbox.Text = insert[6];
-            DLbox.Text = insert[7];
+            procesor = new Procesor(insert);
 
+            AHbox.Text = procesor.rejestr[0].ToString();
+            ALbox.Text = procesor.rejestr[1].ToString();
+            BHbox.Text = procesor.rejestr[2].ToString();
+            BLbox.Text = procesor.rejestr[3].ToString();
+            CHbox.Text = procesor.rejestr[4].ToString();
+            CLbox.Text = procesor.rejestr[5].ToString();
+            DHbox.Text = procesor.rejestr[6].ToString();
+            DLbox.Text = procesor.rejestr[7].ToString();
+
+
+
+        }
+
+        private void Losuj_Click(object sender, RoutedEventArgs e)
+        {
+            string[] insert = new string[8];
+            insert[0] = procesor.randomRejestr();
+            insert[1] = procesor.randomRejestr();
+            insert[2] = procesor.randomRejestr();
+            insert[3] = procesor.randomRejestr();
+            insert[4] = procesor.randomRejestr();
+            insert[5] = procesor.randomRejestr();
+            insert[6] = procesor.randomRejestr();
+            insert[7] = procesor.randomRejestr();
 
             procesor = new Procesor(insert);
+
+            AHbox.Text = procesor.rejestr[0].ToString();
+            ALbox.Text = procesor.rejestr[1].ToString();
+            BHbox.Text = procesor.rejestr[2].ToString();
+            BLbox.Text = procesor.rejestr[3].ToString();
+            CHbox.Text = procesor.rejestr[4].ToString();
+            CLbox.Text = procesor.rejestr[5].ToString();
+            DHbox.Text = procesor.rejestr[6].ToString();
+            DLbox.Text = procesor.rejestr[7].ToString();
+        }
+
+        private void Symuluj_Click(object sender, RoutedEventArgs e)
+        {
+            string action = Rozkaz.Text;
+            string rej1 = rejestr1.Text;
+            string rej2 = rejestr2.Text;
+            try
+            {
+                if (procesor.WhatToDo(action, rej1, rej2))
+                {
+                    AHbox.Text = procesor.rejestr[0].ToString();
+                    ALbox.Text = procesor.rejestr[1].ToString();
+                    BHbox.Text = procesor.rejestr[2].ToString();
+                    BLbox.Text = procesor.rejestr[3].ToString();
+                    CHbox.Text = procesor.rejestr[4].ToString();
+                    CLbox.Text = procesor.rejestr[5].ToString();
+                    DHbox.Text = procesor.rejestr[6].ToString();
+                    DLbox.Text = procesor.rejestr[7].ToString();
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Przypisz lub wylosuj wartości rejestrów");
+            }
+        }
+
+        private void Rozkaz_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string oneElement = Rozkaz.SelectedItem.ToString();
+            if (oneElement == "NOT" || oneElement == "INC" || oneElement == "DEC" || oneElement == "NEG")
+                rejestr2.Visibility = Visibility.Hidden;
+            else
+                rejestr2.Visibility = Visibility.Visible;
+            rej2Nazwa.Visibility = rejestr2.Visibility;
         }
     }
 }
