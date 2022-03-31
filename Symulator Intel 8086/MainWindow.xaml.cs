@@ -43,6 +43,9 @@ namespace Symulator_Intel_8086
             insert[5] = CLinput.Text;
             insert[6] = DHinput.Text;
             insert[7] = DLinput.Text;
+            insert[8] = SIinput.Text;
+            insert[9] = DIinput.Text;
+            insert[10] = BPinput.Text;
 
             procesor = new Procesor(insert);
 
@@ -54,6 +57,9 @@ namespace Symulator_Intel_8086
             CLbox.Text = procesor.rejestr[5].ToString();
             DHbox.Text = procesor.rejestr[6].ToString();
             DLbox.Text = procesor.rejestr[7].ToString();
+            SIBox.Text = procesor.rejestr[8].ToString();
+            DIBox.Text = procesor.rejestr[9].ToString();
+            BPBox.Text = procesor.rejestr[10].ToString();
 
 
 

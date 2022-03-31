@@ -4,13 +4,12 @@ namespace Procesor__Biblioteka
 {
     public class Intel8086
     {
-        public static int IsHex()
-        {
-                int hexInt = Convert.ToInt32(Console.ReadLine(), 16);
-                return hexInt;
-        }
-
         public static int IsHex(string insertString)
+        {
+            int hexInt = Convert.ToInt32(insertString, 16);
+            return hexInt;
+        }
+        public static int IsHex32(string insertString)
         {
             int hexInt = Convert.ToInt32(insertString, 16);
             return hexInt;
@@ -36,10 +35,27 @@ namespace Procesor__Biblioteka
             return ((byte)Value).ToString("x2").ToUpper();
         }
     }
+    public class Memory
+    {
+        public int Address { get; set; }
+        public int Value { get; set; }
+
+        public Memory(int a, int v)
+        {
+            this.Address = a;
+            this.Value = v;
+        }
+        public static int IsHex(string insertString)
+        {
+            int hexInt = Convert.ToInt32(insertString, 32);
+            return hexInt;
+        }
+    }
     /*-------------------Przypisanie rejestrów do klasy Rejest------------------*/
     public class Procesor
     {
         public Rejest[] rejestr;
+        public Memory[] mem;
         public Procesor() { }
         public Procesor(string[] insert){
             rejestr = new Rejest[8];
@@ -51,6 +67,12 @@ namespace Procesor__Biblioteka
             rejestr[5] = new Rejest("CH", Intel8086.IsHex(insert[5]));
             rejestr[6] = new Rejest("DL", Intel8086.IsHex(insert[6]));
             rejestr[7] = new Rejest("DH", Intel8086.IsHex(insert[7]));
+            rejestr[8] = new Rejest("SI", Intel8086.IsHex32(insert[8]));
+            rejestr[9] = new Rejest("DI", Intel8086.IsHex32(insert[9]));
+            rejestr[10] = new Rejest("BP", Intel8086.IsHex32(insert[10]));
+            rejestr[11] = new Rejest("BX", Intel8086.IsHex(insert[7]));
+
+
         }
         /*----------------------------------------------------------------*/
         public int FindFromRejest(string rejestrName)
