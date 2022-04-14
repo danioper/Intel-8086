@@ -9,12 +9,8 @@ namespace Procesor__Biblioteka
             int hexInt = Convert.ToInt32(insertString, 16);
             return hexInt;
         }
-        public static int IsHex32(string insertString)
-        {
-            int hexInt = Convert.ToInt32(insertString, 16);
-            return hexInt;
-        }
     }
+    // karasie jedzą gówno
     /*-------------------Przechowywanie rejestrów------------------*/
     public class Rejest
     {
@@ -30,25 +26,44 @@ namespace Procesor__Biblioteka
         {
             return ToHex(Value);
         }
+        public string ToString(bool a)
+        {
+            return ToHex(Value,true);
+        }
         public static string ToHex(int Value)
         {
             return ((byte)Value).ToString("x2").ToUpper();
+        }
+        public static string ToHex(int Value,bool a)
+        {
+            return (Value).ToString("x4").ToUpper();
         }
     }
     public class Memory
     {
         public int Address { get; set; }
-        public int Value { get; set; }
+        public int MemValue { get; set; }
 
         public Memory(int a, int v)
         {
             this.Address = a;
-            this.Value = v;
+            this.MemValue = v;
         }
-        public static int IsHex(string insertString)
+        public override string ToString()
         {
-            int hexInt = Convert.ToInt32(insertString, 32);
-            return hexInt;
+            return ToHex(MemValue);
+        }
+        public string ToString(bool a)
+        {
+            return ToHex(MemValue, true);
+        }
+        public static string ToHex(int Value)
+        {
+            return ((byte)Value).ToString("x2").ToUpper();
+        }
+        public static string ToHex(int Value, bool a)
+        {
+            return (Value).ToString("x4").ToUpper();
         }
     }
     /*-------------------Przypisanie rejestrów do klasy Rejest------------------*/
@@ -58,7 +73,7 @@ namespace Procesor__Biblioteka
         public Memory[] mem;
         public Procesor() { }
         public Procesor(string[] insert){
-            rejestr = new Rejest[8];
+            rejestr = new Rejest[12];
             rejestr[0] = new Rejest("AL", Intel8086.IsHex(insert[0]));
             rejestr[1] = new Rejest("AH", Intel8086.IsHex(insert[1]));
             rejestr[2] = new Rejest("BL", Intel8086.IsHex(insert[2]));
@@ -67,12 +82,16 @@ namespace Procesor__Biblioteka
             rejestr[5] = new Rejest("CH", Intel8086.IsHex(insert[5]));
             rejestr[6] = new Rejest("DL", Intel8086.IsHex(insert[6]));
             rejestr[7] = new Rejest("DH", Intel8086.IsHex(insert[7]));
-            rejestr[8] = new Rejest("SI", Intel8086.IsHex32(insert[8]));
-            rejestr[9] = new Rejest("DI", Intel8086.IsHex32(insert[9]));
-            rejestr[10] = new Rejest("BP", Intel8086.IsHex32(insert[10]));
-            rejestr[11] = new Rejest("BX", Intel8086.IsHex(insert[7]));
-
-
+            rejestr[8] = new Rejest("SI", Intel8086.IsHex(insert[8]));
+            rejestr[9] = new Rejest("DI", Intel8086.IsHex(insert[9]));
+            rejestr[10] = new Rejest("BP", Intel8086.IsHex(insert[10]));
+            rejestr[11] = new Rejest("BX", Intel8086.IsHex(insert[11]));
+            mem = new Memory[65536];
+            for (int i = 0; i < mem.Length; i++)
+            {
+                mem[i] = new Memory(MemrandomRejestr("4"),MemrandomRejestr());
+            }
+            
         }
         /*----------------------------------------------------------------*/
         public int FindFromRejest(string rejestrName)
@@ -95,6 +114,21 @@ namespace Procesor__Biblioteka
         {
             Random losuj = new Random();
             return Rejest.ToHex(losuj.Next(0, 256));
+        }
+        public string randomRejestr(string a)
+        {
+            Random losuj = new Random();
+            return Rejest.ToHex(losuj.Next(0, 65536), true);
+        }
+        public int MemrandomRejestr()
+        {
+            Random losuj = new Random();
+            return losuj.Next(0, 256);
+        }
+        public int MemrandomRejestr(string a)
+        {
+            Random losuj = new Random();
+            return losuj.Next(0, 65536);
         }
         /*-------------------Wybór rozkazu------------------*/
         public bool WhatToDo(string program, string rej1, string rej2)

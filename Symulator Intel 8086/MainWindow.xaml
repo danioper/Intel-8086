@@ -42,15 +42,15 @@
             </ComboBox>
             <TextBlock x:Name="nazwa_rejestr" HorizontalAlignment="Left" Height="21" Margin="10,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center"><Run Language="pl-pl" Text="Rejestr 1"/></TextBlock>
             <TextBlock x:Name="rej2Nazwa" HorizontalAlignment="Left" Height="21" Margin="84,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center"><Run Text="Rejestr "/><Run Language="pl-pl" Text="2"/><LineBreak/><Run Language="pl-pl"/></TextBlock>
-            <TextBox x:Name="Adres" HorizontalAlignment="Left" Height="23" Margin="85,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="75" TextAlignment="Center" FontSize="16"/>
-            <TextBlock x:Name="nazwa_rejestr_Copy" HorizontalAlignment="Left" Height="21" Margin="9,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center"><Run Language="pl-pl" Text="Adres:"/></TextBlock>
+            <TextBox x:Name="Adres" HorizontalAlignment="Left" Height="23" Margin="58,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" TextAlignment="Center" FontSize="16" MaxLength="4"/>
+            <TextBlock x:Name="nazwa_rejestr_Copy" HorizontalAlignment="Left" Height="21" Margin="-2,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center" RenderTransformOrigin="0.216,0.526"><Run Language="pl-pl" Text="Adres:"/></TextBlock>
             <ComboBox x:Name="kolejnosc" HorizontalAlignment="Left" Margin="86,167,0,0" VerticalAlignment="Top" Width="74">
                 <ComboBoxItem Content="Działaj na rejestrach"/>
                 <ComboBoxItem Content="Wartość adresu do rejestru"/>
                 <ComboBoxItem Content="Rejestr do wartości adresu"/>
             </ComboBox>
-            <TextBlock x:Name="nazwa_rejestr_Copy1" HorizontalAlignment="Left" Height="21" Margin="12,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center"><Run Language="pl-pl" Text="Kolejnosc:"/></TextBlock>
-            <Button x:Name="Sprawdz_adres" Content="&#xD;&#xA;" HorizontalAlignment="Left" Height="23" Margin="162,130,0,0" VerticalAlignment="Top" Width="23"/>
+            <TextBlock x:Name="nazwa_rejestr_Copy1" HorizontalAlignment="Left" Height="21" Margin="8,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center"><Run Language="pl-pl" Text="Kolejnosc:"/></TextBlock>
+            <Button x:Name="Sprawdz_adres" Content="&#xD;&#xA;" HorizontalAlignment="Center" Height="23" Margin="0,130,0,0" VerticalAlignment="Top" Width="22" Click="Sprawdz_adres_Click"/>
 
         </Grid>
         <Grid Background="#FFBEE09C" Height="173" VerticalAlignment="Top" HorizontalAlignment="Left" Width="298">
@@ -99,8 +99,8 @@
             <TextBlock x:Name="CLbox" HorizontalAlignment="Left" Margin="247,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="82" FontSize="34" Background="White" TextAlignment="Center"><Run Language="pl-pl" Text="00"/><LineBreak/><Run/></TextBlock>
             <TextBlock x:Name="DLbox" HorizontalAlignment="Left" Margin="247,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="82" FontSize="34" Background="White" TextAlignment="Center"><Run Language="pl-pl" Text="00"/><LineBreak/><Run/></TextBlock>
             <TextBlock x:Name="AL3_Copy8" HorizontalAlignment="Left" Margin="337,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="45" Width="62" FontSize="22"><Run Text="Adres"/><Run Language="pl-pl" Text=":"/></TextBlock>
-            <TextBlock x:Name="DHbox_Copy" HorizontalAlignment="Left" Margin="404,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="81" FontSize="34" Background="White" TextAlignment="Center"><Run Language="pl-pl" Text="0000"/><LineBreak/><Run/></TextBlock>
-            <TextBlock x:Name="DHbox_Copy1" HorizontalAlignment="Left" Margin="247,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="82" FontSize="34" Background="White" TextAlignment="Center"><Run Language="pl-pl" Text="00"/><LineBreak/><Run/></TextBlock>
+            <TextBlock x:Name="AdresBox" HorizontalAlignment="Left" Margin="404,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="81" FontSize="34" Background="White" TextAlignment="Center"><Run Language="pl-pl" Text="0000"/><LineBreak/><Run/></TextBlock>
+            <TextBlock x:Name="ValueBox" HorizontalAlignment="Left" Margin="247,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="82" FontSize="34" Background="White" TextAlignment="Center"><Run Language="pl-pl" Text="00"/><LineBreak/><Run/></TextBlock>
             <TextBlock x:Name="AL3_Copy9" HorizontalAlignment="Left" Margin="142,313,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="90" FontSize="22"><Run Text="W"/><Run Language="pl-pl" Text="artość"/><Run Text=":"/></TextBlock>
             <TextBlock x:Name="AL3_Copy10" HorizontalAlignment="Left" Margin="355,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="44" Width="49" FontSize="22"><Run Language="pl-pl" Text="SI"/><Run Text=" "/><Run Text=":"/><LineBreak/><Run/></TextBlock>
             <TextBlock x:Name="DIBox" HorizontalAlignment="Left" Margin="404,118,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="46" Width="82" FontSize="34" Background="White" TextAlignment="Center"><Run Language="pl-pl" Text="0000"/><LineBreak/><Run/></TextBlock>

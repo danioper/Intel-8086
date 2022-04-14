@@ -34,7 +34,7 @@ namespace Symulator_Intel_8086
 
         private void Przypisz_Click(object sender, RoutedEventArgs e)
         {
-            string[] insert = new string[8];
+            string[] insert = new string[12];
             insert[0] = AHinput.Text;
             insert[1] = ALinput.Text;
             insert[2] = BHinput.Text;
@@ -46,6 +46,7 @@ namespace Symulator_Intel_8086
             insert[8] = SIinput.Text;
             insert[9] = DIinput.Text;
             insert[10] = BPinput.Text;
+            insert[11] = BHinput.Text + BLinput.Text;
 
             procesor = new Procesor(insert);
 
@@ -57,17 +58,16 @@ namespace Symulator_Intel_8086
             CLbox.Text = procesor.rejestr[5].ToString();
             DHbox.Text = procesor.rejestr[6].ToString();
             DLbox.Text = procesor.rejestr[7].ToString();
-            SIBox.Text = procesor.rejestr[8].ToString();
-            DIBox.Text = procesor.rejestr[9].ToString();
-            BPBox.Text = procesor.rejestr[10].ToString();
-
-
+            SIBox.Text = procesor.rejestr[8].ToString(true);
+            DIBox.Text = procesor.rejestr[9].ToString(true);
+            BPBox.Text = procesor.rejestr[10].ToString(true);
+            BXBox.Text = procesor.rejestr[11].ToString(true);
 
         }
 
         private void Losuj_Click(object sender, RoutedEventArgs e)
         {
-            string[] insert = new string[8];
+            string[] insert = new string[12];
             insert[0] = procesor.randomRejestr();
             insert[1] = procesor.randomRejestr();
             insert[2] = procesor.randomRejestr();
@@ -76,7 +76,10 @@ namespace Symulator_Intel_8086
             insert[5] = procesor.randomRejestr();
             insert[6] = procesor.randomRejestr();
             insert[7] = procesor.randomRejestr();
-
+            insert[8] = procesor.randomRejestr("4");
+            insert[9] = procesor.randomRejestr("4");
+            insert[10] = procesor.randomRejestr("4");
+            insert[11] = insert[2] + insert[3];
             procesor = new Procesor(insert);
 
             AHbox.Text = procesor.rejestr[0].ToString();
@@ -87,6 +90,10 @@ namespace Symulator_Intel_8086
             CLbox.Text = procesor.rejestr[5].ToString();
             DHbox.Text = procesor.rejestr[6].ToString();
             DLbox.Text = procesor.rejestr[7].ToString();
+            SIBox.Text = procesor.rejestr[8].ToString(true);
+            DIBox.Text = procesor.rejestr[9].ToString(true);
+            BPBox.Text = procesor.rejestr[10].ToString(true);
+            BXBox.Text = procesor.rejestr[11].ToString(true);
         }
 
         private void Symuluj_Click(object sender, RoutedEventArgs e)
@@ -122,6 +129,13 @@ namespace Symulator_Intel_8086
             else
                 rejestr2.Visibility = Visibility.Visible;
             rej2Nazwa.Visibility = rejestr2.Visibility;
+        }
+
+        private void Sprawdz_adres_Click(object sender, RoutedEventArgs e)
+        {
+            AdresBox.Text = Convert.ToInt32(Adres.Text, 16).ToString("x4").ToUpper();
+            ValueBox.Text = Convert.ToString(procesor.mem[Convert.ToInt32(Adres.Text, 16)].MemValue, 16).ToUpper();
+
         }
     }
 }
