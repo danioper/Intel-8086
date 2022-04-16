@@ -10,7 +10,6 @@ namespace Procesor__Biblioteka
             return hexInt;
         }
     }
-    // karasie jedzą gówno
     /*-------------------Przechowywanie rejestrów------------------*/
     public class Rejest
     {
@@ -106,6 +105,10 @@ namespace Procesor__Biblioteka
                 case "CL": return 5;
                 case "DH": return 6;
                 case "DL": return 7;
+                case "SI": return 8;
+                case "DI": return 9;
+                case "BP": return 10;
+                case "BX": return 11;
                 default: return -1;
             }
         }
@@ -131,6 +134,43 @@ namespace Procesor__Biblioteka
             return losuj.Next(0, 65536);
         }
         /*-------------------Wybór rozkazu------------------*/
+        public bool WhatToDoExtanded(string Prio,string program, string rej1, string rej2, string adresvalue, bool strona, string SD, string BP)
+        {
+            switch (Prio)
+            {
+                case "Działaj na rejestrach":
+                    WhatToDo(program,rej1,rej2);
+                    break;
+                case "Adresowanie bezpośrednie rejestr do pamięci":
+                    WhatToDoMemory(program, rej1, adresvalue, strona);
+                    break;
+                case "Adresowanie bezpośrednie pamięć do rejestru":
+                    WhatToDoMemory(program, rej1, adresvalue, strona);
+                    break;
+                case "Adresowanie indeksowe rejestr do pamięci":
+                    Locate(adresvalue, SD, BP);
+                    WhatToDoMemory(program, rej1, adresvalue, strona);
+                    break;
+                case "Adresowanie indeksowe pamięć do rejestru":
+                    WhatToDoMemory(program, rej1, Locate(adresvalue, SD, BP), strona);
+                    break;
+                case "Adresowanie bazowe rejestr do pamięci":
+                    Dec(rej1);
+                    break;
+                case "Adresowanie bazowe pamięć do rejestru":
+                    Dec(rej1);
+                    break;
+                case "Adresowanie Indeksowo-bazowe rejestr do pamięci":
+                    Dec(rej1);
+                    break;
+                case "Adresowanie Indeksowo-bazowe pamięć do rejestru":
+                    Dec(rej1);
+                    break;
+                default:
+                    throw new Exception();
+            }
+            return true;
+        }
         public bool WhatToDo(string program, string rej1, string rej2)
         {
             switch(program)
@@ -174,7 +214,55 @@ namespace Procesor__Biblioteka
             }
             return true;
         }
-
+        public bool WhatToDoMemory(string program, string rej1, string memory, bool strona)
+        {
+            switch (program)
+            {
+                case "MOV":
+                    MovMem(rej1, memory, strona);
+                    break;
+                case "XCHG":
+                    XCHGMem(rej1, memory);
+                    break;
+                case "INC":
+                    IncMem(memory);
+                    break;
+                case "DEC":
+                    DecMem(memory);
+                    break;
+                case "NOT":
+                    NotMem(memory);
+                    break;
+                case "NEG":
+                    NotMem(memory);
+                    IncMem(memory);
+                    break;
+                case "AND":
+                    AndMem(rej1, memory, strona);
+                    break;
+                case "OR":
+                    OrMem(rej1, memory, strona);
+                    break;
+                case "XOR":
+                    XorMem(rej1, memory, strona);
+                    break;
+                case "ADD":
+                    AddMem(rej1, memory, strona);
+                    break;
+                case "SUB":
+                    SubMem(rej1, memory, strona);
+                    break;
+                default:
+                    throw new Exception();
+            }
+            return true;
+        }
+        /*------------------------------Operacja lokalizacji--------------------------------*/
+        public string Locate(string adresvalue, string SD, string BP)
+        {
+            int adres = Convert.ToInt32(adresvalue, 16) + rejestr[FindFromRejest(SD)].Value;
+            return adres.ToString();
+        }
         /*------------------------------Operacje dwu elementowe----------------------------------------*/
         public void Mov(string rej1, string rej2)
         { 
@@ -222,5 +310,74 @@ namespace Procesor__Biblioteka
         {          
             rejestr[FindFromRejest(rej1)].Value = ~((byte)(rejestr[FindFromRejest(rej1)].Value));
         }
+
+        /*------------------------------Operacje dwu elementowe na pamięci----------------------------------------*/
+        public void MovMem(string rej1, string rej2, bool strona)
+        {
+            if(strona == true)
+                rejestr[FindFromRejest(rej1)].Value = mem[Convert.ToInt32(rej2, 16)].MemValue;
+            else
+                 mem[Convert.ToInt32(rej2, 16)].MemValue = rejestr[FindFromRejest(rej1)].Value;
+        }
+
+        public void XCHGMem(string rej1, string rej2)
+        {
+            var tmp = rejestr[FindFromRejest(rej1)].Value;
+            rejestr[FindFromRejest(rej1)].Value = mem[Convert.ToInt32(rej2, 16)].MemValue;
+            mem[Convert.ToInt32(rej2, 16)].MemValue = tmp;
+        }
+        public void AddMem(string rej1, string rej2, bool strona)
+        {
+            if (strona == true)
+                rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value + (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+            else
+                mem[Convert.ToInt32(rej2, 16)].MemValue = (byte)rejestr[FindFromRejest(rej1)].Value + (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+        }
+        public void SubMem(string rej1, string rej2, bool strona)
+        {
+            if (strona == true)
+                rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value - (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+            else
+                mem[Convert.ToInt32(rej2, 16)].MemValue = (byte)rejestr[FindFromRejest(rej1)].Value - (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+
+        }
+        public void AndMem(string rej1, string rej2, bool strona)
+        {
+            if (strona == true)
+                rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value & (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+            else
+                mem[Convert.ToInt32(rej2, 16)].MemValue = (byte)rejestr[FindFromRejest(rej1)].Value & (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+        }
+        public void OrMem(string rej1, string rej2, bool strona)
+        {
+            if (strona == true)
+                rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value | (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+            else
+                mem[Convert.ToInt32(rej2, 16)].MemValue = (byte)rejestr[FindFromRejest(rej1)].Value | (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+        }
+        public void XorMem(string rej1, string rej2, bool strona)
+        {
+            if (strona == true)
+                rejestr[FindFromRejest(rej1)].Value = (byte)rejestr[FindFromRejest(rej1)].Value ^ (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+            else
+                mem[Convert.ToInt32(rej2, 16)].MemValue = (byte)rejestr[FindFromRejest(rej1)].Value ^ (byte)mem[Convert.ToInt32(rej2, 16)].MemValue;
+        }
+        /*------------------------------Operacje jedno elementowe----------------------------------------*/
+        public void IncMem(string rej1)
+        {
+            mem[Convert.ToInt32(rej1, 16)].MemValue++;
+        }
+
+        public void DecMem(string rej1)
+        {
+            mem[Convert.ToInt32(rej1, 16)].MemValue--;
+        }
+
+        public void NotMem(string rej1)
+        {
+            mem[Convert.ToInt32(rej1, 16)].MemValue = ~((byte)(mem[Convert.ToInt32(rej1, 16)].MemValue));
+        }
     }
 }
+
+

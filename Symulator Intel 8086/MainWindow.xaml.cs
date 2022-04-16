@@ -26,10 +26,27 @@ namespace Symulator_Intel_8086
         {
             procesor = new Procesor();
             InitializeComponent();
+            kolejnosc.Items.Add("Działaj na rejestrach");
+            kolejnosc.Items.Add("Adresowanie bezpośrednie pamięć do rejestru");
+            kolejnosc.Items.Add("Adresowanie bezpośrednie rejestr do pamięci");
+            kolejnosc.Items.Add("Adresowanie indeksowe pamięć do rejestru");
+            kolejnosc.Items.Add("Adresowanie indeksowe rejestr do pamięci");
+            kolejnosc.Items.Add("Adresowanie bazowe pamięć do rejestru");
+            kolejnosc.Items.Add("Adresowanie bazowe rejestr do pamięci");
+            kolejnosc.Items.Add("Adresowanie Indeksowo-bazowe pamięć do rejestru");
+            kolejnosc.Items.Add("Adresowanie Indeksowo-bazowe rejestr do pamięci");
             Rozkaz.Items.Add("INC");
             Rozkaz.Items.Add("DEC");
             Rozkaz.Items.Add("NEG");
             Rozkaz.Items.Add("NOT");
+            SBOX.Items.Add("SI");
+            SBOX.Items.Add("DI");
+            BBOX.Items.Add("BX");
+            BBOX.Items.Add("BP");
+            SBOX.Visibility = Visibility.Hidden;
+            SBlock.Visibility = SBOX.Visibility;
+            BBOX.Visibility = Visibility.Hidden;
+            BBlock.Visibility = SBOX.Visibility;
         }
 
         private void Przypisz_Click(object sender, RoutedEventArgs e)
@@ -98,29 +115,43 @@ namespace Symulator_Intel_8086
 
         private void Symuluj_Click(object sender, RoutedEventArgs e)
         {
+            bool strona = true;
+            if (kolejnosc.Text == "Adresowanie bezpośrednie rejestr do pamięci" || kolejnosc.Text == "Adresowanie indeksowe rejestr do pamięci" || kolejnosc.Text == "Adresowanie bazowe rejestr do pamięci" || kolejnosc.Text == "Adresowanie bazowe rejestr do pamięci")
+            {
+                strona = false;
+            }
+            string kolej = kolejnosc.Text;
+            string adresvalue = "00";
+            if (Adres.Text != "")
+            {
+                adresvalue = Adres.Text;
+            }
             string action = Rozkaz.Text;
             string rej1 = rejestr1.Text;
             string rej2 = rejestr2.Text;
-            try
-            {
-                if (procesor.WhatToDo(action, rej1, rej2))
-                {
-                    AHbox.Text = procesor.rejestr[0].ToString();
-                    ALbox.Text = procesor.rejestr[1].ToString();
-                    BHbox.Text = procesor.rejestr[2].ToString();
-                    BLbox.Text = procesor.rejestr[3].ToString();
-                    CHbox.Text = procesor.rejestr[4].ToString();
-                    CLbox.Text = procesor.rejestr[5].ToString();
-                    DHbox.Text = procesor.rejestr[6].ToString();
-                    DLbox.Text = procesor.rejestr[7].ToString();
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Przypisz lub wylosuj wartości rejestrów");
-            }
-        }
+            string SD = SBOX.Text;
+            string BP = BPBox.Text;
+            
+                    try
+                    {
+                        if (procesor.WhatToDoExtanded(kolej,action, rej1, rej2, adresvalue, strona,SD,BP))
+                        {
+                            AHbox.Text = procesor.rejestr[0].ToString();
+                            ALbox.Text = procesor.rejestr[1].ToString();
+                            BHbox.Text = procesor.rejestr[2].ToString();
+                            BLbox.Text = procesor.rejestr[3].ToString();
+                            CHbox.Text = procesor.rejestr[4].ToString();
+                            CLbox.Text = procesor.rejestr[5].ToString();
+                            DHbox.Text = procesor.rejestr[6].ToString();
+                            DLbox.Text = procesor.rejestr[7].ToString();
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Przypisz lub wylosuj wartości rejestrów");
+                    }
 
+        }
         private void Rozkaz_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string oneElement = Rozkaz.SelectedItem.ToString();
@@ -131,6 +162,39 @@ namespace Symulator_Intel_8086
             rej2Nazwa.Visibility = rejestr2.Visibility;
         }
 
+        private void kolejnosc_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string element = kolejnosc.SelectedItem.ToString();
+            /*if (element != "Działaj na rejestrach")
+            {
+                rejestr2.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                rejestr2.Visibility = Visibility.Visible;
+                rej2Nazwa.Visibility = rejestr2.Visibility;
+            }*/
+            if (element == "Adresowanie indeksowe pamięć do rejestru" || element == "Adresowanie indeksowe rejestr do pamięci" || element == "Adresowanie Indeksowo-bazowe pamięć do rejestru" || element == "Adresowanie Indeksowo-bazowe rejestr do pamięci")
+            {
+                SBOX.Visibility = Visibility.Visible;
+                SBlock.Visibility = SBOX.Visibility;
+            }
+            else
+            {
+                SBOX.Visibility = Visibility.Hidden;
+                SBlock.Visibility = SBOX.Visibility;
+            }
+            if (element == "Adresowanie bazowe pamięć do rejestru" || element == "Adresowanie bazowe rejestr do pamięci" || element == "Adresowanie Indeksowo-bazowe pamięć do rejestru" || element == "Adresowanie Indeksowo-bazowe rejestr do pamięci")
+            {
+                BBOX.Visibility = Visibility.Visible;
+                BBlock.Visibility = BBOX.Visibility;
+            }
+            else
+            {
+                BBOX.Visibility = Visibility.Hidden;
+                BBlock.Visibility = BBOX.Visibility;
+            }
+        }
         private void Sprawdz_adres_Click(object sender, RoutedEventArgs e)
         {
             AdresBox.Text = Convert.ToInt32(Adres.Text, 16).ToString("x4").ToUpper();

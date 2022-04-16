@@ -10,7 +10,7 @@
         <Grid Margin="1,173,0,0" Background="#FFBEE09C" Height="261" VerticalAlignment="Top" HorizontalAlignment="Left" Width="297">
 
             <TextBlock HorizontalAlignment="Left" Height="21" Margin="10,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="179"><Run Language="pl-pl" Text="Wybierz rozkaz"/></TextBlock>
-            <ComboBox x:Name="Rozkaz" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="149" SelectionChanged="Rozkaz_SelectionChanged">
+            <ComboBox x:Name="Rozkaz" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="147" SelectionChanged="Rozkaz_SelectionChanged">
                 <ComboBoxItem Content="MOV"/>
                 <ComboBoxItem Content="XCHG"/>
                 <ComboBoxItem Content="AND"/>
@@ -44,13 +44,19 @@
             <TextBlock x:Name="rej2Nazwa" HorizontalAlignment="Left" Height="21" Margin="84,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center"><Run Text="Rejestr "/><Run Language="pl-pl" Text="2"/><LineBreak/><Run Language="pl-pl"/></TextBlock>
             <TextBox x:Name="Adres" HorizontalAlignment="Left" Height="23" Margin="58,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="76" TextAlignment="Center" FontSize="16" MaxLength="4"/>
             <TextBlock x:Name="nazwa_rejestr_Copy" HorizontalAlignment="Left" Height="21" Margin="-2,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center" RenderTransformOrigin="0.216,0.526"><Run Language="pl-pl" Text="Adres:"/></TextBlock>
-            <ComboBox x:Name="kolejnosc" HorizontalAlignment="Left" Margin="86,167,0,0" VerticalAlignment="Top" Width="74">
-                <ComboBoxItem Content="Działaj na rejestrach"/>
-                <ComboBoxItem Content="Wartość adresu do rejestru"/>
-                <ComboBoxItem Content="Rejestr do wartości adresu"/>
+            <ComboBox x:Name="kolejnosc" HorizontalAlignment="Left" Margin="162,34,0,0" VerticalAlignment="Top" Width="125" SelectionChanged="kolejnosc_SelectionChanged">
+                
             </ComboBox>
-            <TextBlock x:Name="nazwa_rejestr_Copy1" HorizontalAlignment="Left" Height="21" Margin="8,168,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center"><Run Language="pl-pl" Text="Kolejnosc:"/></TextBlock>
+            <TextBlock x:Name="nazwa_rejestr_Copy1" HorizontalAlignment="Left" Height="21" Margin="186,8,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74" TextAlignment="Center"><Run Language="pl-pl" Text="Kolejnosc:"/></TextBlock>
             <Button x:Name="Sprawdz_adres" Content="&#xD;&#xA;" HorizontalAlignment="Center" Height="23" Margin="0,130,0,0" VerticalAlignment="Top" Width="22" Click="Sprawdz_adres_Click"/>
+            <ComboBox x:Name="SBOX" HorizontalAlignment="Left" Margin="174,89,0,0" VerticalAlignment="Top" Width="59">
+                
+            </ComboBox>
+            <ComboBox x:Name="BBOX" HorizontalAlignment="Left" Margin="239,89,0,0" VerticalAlignment="Top" Width="57" SelectedIndex="-1" Visibility="Visible">
+                
+            </ComboBox>
+            <TextBlock x:Name="SBlock" HorizontalAlignment="Left" Height="21" Margin="174,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" TextAlignment="Center"><Run Language="pl-pl" Text="SI lub DI"/></TextBlock>
+            <TextBlock x:Name="BBlock" HorizontalAlignment="Left" Height="21" Margin="238,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="58" TextAlignment="Center"><Run Language="pl-pl" Text="BX lub BP"/></TextBlock>
 
         </Grid>
         <Grid Background="#FFBEE09C" Height="173" VerticalAlignment="Top" HorizontalAlignment="Left" Width="298">
