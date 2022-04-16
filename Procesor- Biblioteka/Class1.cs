@@ -148,23 +148,22 @@ namespace Procesor__Biblioteka
                     WhatToDoMemory(program, rej1, adresvalue, strona);
                     break;
                 case "Adresowanie indeksowe rejestr do pamięci":
-                    Locate(adresvalue, SD, BP);
-                    WhatToDoMemory(program, rej1, adresvalue, strona);
+                    WhatToDoMemory(program, rej1, Locate(adresvalue, SD, BP, Prio), strona);
                     break;
                 case "Adresowanie indeksowe pamięć do rejestru":
-                    WhatToDoMemory(program, rej1, Locate(adresvalue, SD, BP), strona);
+                    WhatToDoMemory(program, rej1, Locate(adresvalue, SD, BP, Prio), strona);
                     break;
                 case "Adresowanie bazowe rejestr do pamięci":
-                    Dec(rej1);
+                    WhatToDoMemory(program, rej1, Locate(adresvalue, SD, BP, Prio), strona);
                     break;
                 case "Adresowanie bazowe pamięć do rejestru":
-                    Dec(rej1);
+                    WhatToDoMemory(program, rej1, Locate(adresvalue, SD, BP, Prio), strona);
                     break;
                 case "Adresowanie Indeksowo-bazowe rejestr do pamięci":
-                    Dec(rej1);
+                    WhatToDoMemory(program, rej1, Locate(adresvalue, SD, BP, Prio), strona);
                     break;
                 case "Adresowanie Indeksowo-bazowe pamięć do rejestru":
-                    Dec(rej1);
+                    WhatToDoMemory(program, rej1, Locate(adresvalue, SD, BP, Prio), strona);
                     break;
                 default:
                     throw new Exception();
@@ -258,11 +257,26 @@ namespace Procesor__Biblioteka
             return true;
         }
         /*------------------------------Operacja lokalizacji--------------------------------*/
-        public string Locate(string adresvalue, string SD, string BP)
+        public string Locate(string adresvalue, string SD, string BP, string Prio)
         {
-            int adres = Convert.ToInt32(adresvalue, 16) + rejestr[FindFromRejest(SD)].Value;
-            return adres.ToString();
+            if (Prio == "Adresowanie indeksowe rejestr do pamięci" || Prio == "Adresowanie indeksowe pamięć do rejestru") 
+            {
+                int adres = (Convert.ToInt32(adresvalue, 16)) + (rejestr[FindFromRejest(SD)].Value);
+                return adres.ToString("X");
+            }
+            if (Prio == "Adresowanie bazowe rejestr do pamięci" || Prio == "Adresowanie bazowe pamięć do rejestru")
+            {
+                int adres = (Convert.ToInt32(adresvalue, 16)) + (rejestr[FindFromRejest(BP)].Value);
+                return adres.ToString("X");
+            }
+            if (Prio == "Adresowanie Indeksowo-bazowe rejestr do pamięci" || Prio == "Adresowanie Indeksowo-bazowe pamięć do rejestru")
+            {
+                int adres = (Convert.ToInt32(adresvalue, 16)) + (rejestr[FindFromRejest(SD)].Value) + (rejestr[FindFromRejest(BP)].Value);
+                return adres.ToString("X");
+            }
+            return adresvalue;
         }
+        
         /*------------------------------Operacje dwu elementowe----------------------------------------*/
         public void Mov(string rej1, string rej2)
         { 

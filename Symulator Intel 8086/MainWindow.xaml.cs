@@ -116,7 +116,7 @@ namespace Symulator_Intel_8086
         private void Symuluj_Click(object sender, RoutedEventArgs e)
         {
             bool strona = true;
-            if (kolejnosc.Text == "Adresowanie bezpośrednie rejestr do pamięci" || kolejnosc.Text == "Adresowanie indeksowe rejestr do pamięci" || kolejnosc.Text == "Adresowanie bazowe rejestr do pamięci" || kolejnosc.Text == "Adresowanie bazowe rejestr do pamięci")
+            if (kolejnosc.Text == "Adresowanie bezpośrednie rejestr do pamięci" || kolejnosc.Text == "Adresowanie indeksowe rejestr do pamięci" || kolejnosc.Text == "Adresowanie bazowe rejestr do pamięci" || kolejnosc.Text == "Adresowanie Indeksowo-bazowe rejestr do pamięci")
             {
                 strona = false;
             }
@@ -130,7 +130,7 @@ namespace Symulator_Intel_8086
             string rej1 = rejestr1.Text;
             string rej2 = rejestr2.Text;
             string SD = SBOX.Text;
-            string BP = BPBox.Text;
+            string BP = BBOX.Text;
             
                     try
                     {
